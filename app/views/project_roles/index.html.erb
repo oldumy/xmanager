@@ -1,0 +1,23 @@
+<h1>项目角色列表</h1>
+
+<table cellpadding="5" cellspacing='0'>
+  <tr>
+    <th>项目角色</th>
+    <th>角色描述</th>
+    <th>操作</th>
+  </tr>
+
+  <% @project_roles.each do |project_role| %>
+    <tr>
+      <td><%= project_role.role_name %></td>
+      <td><%= project_role.description %></td>
+      <td><%= link_to '详情', project_project_role_path(@project,project_role) %>
+        <%= link_to '编辑', edit_project_project_role_path(@project,project_role) %>
+        <%= link_to '删除', project_project_role_path(@project,project_role), :confirm => '确定删除该项目角色?', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to '创建项目角色', new_project_project_role_path(@project) %>

@@ -1,0 +1,9 @@
+<%= include_jquery %>
+<%= include_jqueryui %>
+<%= include_jquerytools %>
+<%= include_jqueryrails %>
+<%= include_jqueryhighcharts %>
+
+<% highchart("my_id", @data) do |c| %>
+  <%=raw "options.tooltip.formatter = function() { return '<b>'+ this.series.name +'</b><br/>'+ this.x +'<b>:</b> '+ this.y}" %>
+<%end %>

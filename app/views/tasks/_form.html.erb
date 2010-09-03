@@ -1,0 +1,50 @@
+<h1>tasks</h1>
+
+<%= form_for(@task, :url => backlog_tasks_path(@backlog)) do |f| %>
+  <% if @task.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+      <ul>
+      <% @task.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :workload %><br />
+    <%= f.text_field :workload %>
+  </div>
+  <div class="field">
+    <%= f.label :progress %><br />
+    <%= f.text_field :progress %>
+  </div>
+  <div class="field">
+    <%= f.label :backlog_id %><br />
+    <%= f.text_field :backlog_id %>
+  </div>
+  <div class="field">
+    <%= f.label :surplus_workload %><br />
+    <%= f.text_field :surplus_workload %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+

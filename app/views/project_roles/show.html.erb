@@ -1,0 +1,16 @@
+<div class="form-wrapper">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <b>项目角色:</b>
+    <%= @project_role.role_name %>
+  </p>
+
+  <p>
+    <b>角色描述:</b>
+    <%= @project_role.description %>
+  </p>
+
+
+  <%= link_to '编辑', edit_project_project_role_path(@project,@project_role) %>
+</div>

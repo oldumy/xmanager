@@ -1,0 +1,39 @@
+<div class="form-wrapper">
+<h1>添加用户</h1>
+  <%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+      <div id="errorExplanation">
+        <h2><%= pluralize(@user.errors.count,"error") %></h2>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %>  </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <p>
+      <%= f.label :登录名称 %><br />
+      <%= f.text_field :login %>
+    </p>
+    <p>
+      <%= f.label :用户姓名 %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :密码 %><br />
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :确认密码 %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+    <p>
+      <%= f.label :用户角色 %><br />
+      <%= f.collection_select(:role_id,get_roles_list,:id,:description) %>
+    </p>
+    <p>
+      <%= f.submit '创建' %>
+    </p>
+  <% end %>
+</div>

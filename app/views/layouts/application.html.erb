@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Xmanager</title>
+    <%= stylesheet_link_tag :all %>
+    <%= include_sexybuttons %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="wrapper2">
+        <div id="top-menu">
+          <div id="account">
+            <ul>
+              <li>
+                <%if @current_user.nil?%>
+                  <%=  link_to "登录",signin_path%>
+                <%else%>
+                  <%=  link_to "修改#{@current_user.login}账户",edit_user_path(@current_user)%>
+                  <%=  link_to "退出",user_session_path,:method => 'delete'%>
+                <%end %>
+              </li>
+            </ul>
+          </div>
+          <ul>
+            <li><a href="/">主页</a></li>
+            <li><a href="/projects">项目</a></li>
+            <li><a href="/users">用户</a></li>
+          </ul>
+        </div>
+        <div id="header">
+          <%=generate_ul%>
+        </div>
+        <div id="content">
+          <%= yield %>
+        </div>
+        <div id="footer">
+          Powered by sibo&copy;2010
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

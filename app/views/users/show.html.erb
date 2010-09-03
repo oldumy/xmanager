@@ -1,0 +1,19 @@
+<div class="form-wrapper">
+  <p id="notice"><%= notice %></p>
+  <p>
+    <b>登录名称:</b>
+    <%=h @user.login %>
+  </p>
+
+  <p>
+    <b>用户姓名:</b>
+    <%=h @user.name %>
+  </p>
+
+  <p>
+    <b>用户角色:</b>
+    <%=h role_description @user %>
+  </p>
+
+  <%= link_to '编辑', edit_user_path(@user) %>
+</div>

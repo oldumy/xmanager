@@ -1,0 +1,26 @@
+<div class="form-wrapper">
+  <h1>项目<%= @project.name %></h1>
+
+  <h2>编辑</h2>
+
+  <% form_for([@project, @sprint]) do |f| %>
+
+    <p>
+      <%= f.label :名称 %><br />
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :开始时间 %><br />
+      <%= f.date_select :start_time %>
+    </p>
+    <p>
+      <%= f.label :结束时间 %><br />
+      <%= f.date_select :end_time %>
+    </p>
+    <p>
+      <%= f.submit "更新" %>
+    </p>
+  <% end %>
+
+  <%= link_to '详情', project_sprint_path(@project, @sprint) %>
+</div>

@@ -1,0 +1,25 @@
+<div class="form-wrapper">
+  <h1>新建项目</h1>
+
+  <%= form_for(@project) do |f| %>
+    <% if @project.errors.any? %>
+      <div id="error_explanation">
+        <h2>新建项目失败 <%= pluralize(@project.errors.count, "错误") %></h2>
+
+        <ul>
+          <% @project.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label "项目名称" %><br />
+      <%= f.text_field :name %>
+    </div>
+    <div class="actions">
+      <%= f.submit "新建"%>
+    </div>
+  <% end %>
+</div>

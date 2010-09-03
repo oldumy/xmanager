@@ -1,0 +1,33 @@
+<h1>迭代<%= @sprint.name %>任务列表</h1>
+
+<%= form_for("", :url => '#') do |f| %>
+  <table cellpadding="5" cellspacing="0">
+    <tr>
+      <th>名称</th>
+      <th>创建时间</th>
+      <th>指派给</th>
+      <th>工作量</th>
+      <th>剩余工作量</th>
+      <th>进度</th>
+      <th style="width:15%">操作</th>
+    </tr>
+
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.name %></td>
+        <td style="text-align: center"><%= task.created_at.strftime("%Y-%m-%d %H:%m:%S") %></td>
+        <td><%= task.user.name unless task.user.blank? %></td>
+        <td><%= task.workload %></td>
+        <td><%= task.surplus_workload %></td>
+        <td><%= "#{task.progress.blank?? 0:task.progress}%" %></td>
+        <td>
+          <%= link_to '详细', project_sprint_task_path(@project, task.sprint, task) %>
+          <%= link_to '编辑', edit_project_sprint_task_path(@project, task.sprint, task) + '?edit=f' %>
+          <%= link_to '删除', project_sprint_task_path(@project, task.sprint, task), :confirm => 'Are you sure?', :method => :delete %>
+          <%= link_for_update_progress(task) %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+<%= will_paginate @tasks, :previous_label => '上一页', :next_label => '下一页'%>

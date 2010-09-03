@@ -1,0 +1,46 @@
+<div class="form-wrapper">
+  <h1>项目<%= @project.name %></h1>
+
+  <p>
+    <b>迭代的名称</b>
+    <%=h @sprint.name %>
+  </p>
+
+  <p>
+    <b>开始时间</b>
+    <%=h @sprint.start_time %>
+  </p>
+
+  <p>
+    <b>结束时间</b>
+    <%=h @sprint.end_time %>
+  </p>
+<%= link_to '编辑', edit_project_sprint_path(@project, @sprint) %>
+</div>
+
+<p>
+  <b>待办事项</b>
+</p>
+<table cellpadding="5" cellspacing="0">
+  <tr>
+    <th>描述</th>
+    <th>故事点</th>
+    <th>优先级</th>
+    <th>状态</th>
+    <th>验收条件</th>
+    <th>操作</th>
+  </tr>
+  <% @sprint.backlogs.each do |backlog| %>
+    <tr>
+      <td><%= backlog.backlog_description %></td>
+      <td><%= backlog.story_points %></td>
+      <td><%= backlog.level %></td>
+      <td><%= backlog.status == 1? "已完成":"未完成" %></td>
+      <td><%= backlog.inspection %></td>
+      <td><%= link_to '删除', project_sprint_path(@sprint, :tag => backlog.id),
+          :confirm => '确定删除？', :method => :delete %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= render :partial => "sprint_burn_down_charts/index", :object => @data %>

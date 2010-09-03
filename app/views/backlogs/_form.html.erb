@@ -1,0 +1,50 @@
+<% if @backlog.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@backlog.errors.count, "error") %> prohibited this backlog from being saved:</h2>
+
+    <ul>
+      <% @backlog.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_for(@backlog,:url => project_backlogs_path) do |f| %>
+  <% if params[:addType].blank? %>
+    <%= link_to "按描述添加", new_project_backlog_path(:addType => 'desc')%>
+    <div>
+      <%= f.label '作为' %><br />
+      <%= f.collection_select(:project_role_id,roles_for_project,:id,:role_name) %>
+    </div>
+    <div class="field">
+      <%= f.label '可以' %><br />
+      <%= f.text_field :what %>
+    </div>
+    <div class="field">
+      <%= f.label '以便' %><br />
+      <%= f.text_field :why %>
+    </div>
+  <% else %>
+    <%= link_to "常规添加", new_project_backlog_path%>
+    <div class="field">
+      <%= f.label '描述' %><br />
+      <%= f.text_field :description %>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label '故事点' %><br />
+    <%= f.text_field :story_points %>
+  </div>
+  <div class="field">
+    <%= f.label '优先级' %><br />
+    <%= f.text_field :level %>
+  </div>
+  <div class="field">
+    <%= f.label '验收条件' %><br />
+    <%= f.text_area :inspection %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '创建' %>
+  </div>
+<% end %>

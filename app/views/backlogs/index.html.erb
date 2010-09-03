@@ -1,0 +1,51 @@
+<h1>待办事项列表</h1>
+
+<script type="text/javascript">
+  function chooseallcheckbox(checkboxName,val){
+    var box = document.getElementsByName(checkboxName);
+    for(i=0;i < box.length;i++){
+      box[i].checked = val;
+    }
+  }
+</script>
+
+<%= form_for("",:url => project_backlogs_path(@project)) do |f| %>
+  <table cellpadding="5" cellspacing='0'>
+    <tr>
+      <th><input type="checkbox" title="全选/取消" onclick="chooseallcheckbox('backlogs[]',this.checked)"/></th>
+      <th>描述</th>
+      <th>故事点</th>
+      <th>实际故事点</th>
+      <th>优先级</th>
+      <th>状态</th>
+      <th>验收条件</th>
+      <th>迭代</th>
+      <th>操作</th>
+    </tr>
+    <% @backlogs.each do |backlog| %>
+      <tr>
+        <td><%= check_box_tag "backlogs[]",backlog.id %></td>
+        <td><%= backlog.backlog_description %></td>
+        <td><%= backlog.story_points %></td>
+        <td><%= backlog.actual_story_points %></td>
+        <td><%= backlog.level %></td>
+        <td><%= backlog.status == 1? "已完成":"未完成" %></td>
+        <td><%= backlog.inspection %></td>
+        <td><%= backlog.sprint.nil? ? "":backlog.sprint.name %></td>
+        <td>
+          <%= link_to '编辑', edit_project_backlog_path(@project.id,backlog.id) %>
+          <%= link_to '删除', project_backlog_path(@project.id,backlog.id), :confirm => "确定要删除该待办事项吗？\n该操作将同时删除其下所有任务", :method => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= will_paginate @backlogs, :previous_label => '上一页', :next_label => '下一页'%>
+  <div class="actions">
+    <%= f.collection_select(:sprint_id,name_for_sprint,:id,:name) %>
+    <%= f.submit '指定迭代'%>
+  </div>
+<% end %>
+
+<br />
+
+<%= link_to '创建待办事项', new_project_backlog_path(@project) %>
