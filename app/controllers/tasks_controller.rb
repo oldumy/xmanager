@@ -138,6 +138,6 @@ class TasksController < ApplicationController
   end
 
   def load_developers
-    @developers = User.joins(:role).where("roles.role_name='developers'")
+    @developers = User.joins(:role).where("roles.role_name!=?", "administrators")
   end
 end

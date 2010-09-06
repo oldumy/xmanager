@@ -1,0 +1,4 @@
+Release 0.1.1 :: Sep 6, 2010
+
+* tasks can be assigned to roles except administrators.
+
