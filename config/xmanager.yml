@@ -1,0 +1,30 @@
+defaults: &defaults
+  menus:
+    administrators:
+      -
+        - "users"
+        - "/users"
+    project_managers:
+      - 
+        - "user_stories"
+        - "/backlogs"
+      -
+        - "new_user_story"
+        - "/backlogs/new"
+      -
+        - "tasks"
+        - "/tasks"
+      -
+        - "new_task"
+        - "/tasks/new"
+      -
+        - "user_roles"
+        - "/project_roles"
+production:
+  <<: *defaults
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
