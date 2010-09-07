@@ -1,3 +1,7 @@
+<%= content_for :menus do %>
+  <%= menus(current_user, :users) %>
+<% end %>
+
 <%= notice %> <br />
 <h1>欢迎 <%= @user.nil?? "来宾用户" : @user.login%>! </h1>
 
