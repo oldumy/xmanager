@@ -14,12 +14,12 @@ describe Project do
     end
   end
 
-  describe 'Project association' do
-    before(:all) do
+  context 'Project association' do
+    before(:each) do
       @project = Factory(:project)
       @project_id = @project.id
     end
-    
+
     it "should has many backlogs" do
       [Factory(:backlog, :project => @project), Factory(:backlog, :project => @project)]
       @project.should have(2).backlogs

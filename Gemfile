@@ -45,6 +45,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'webrat'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'

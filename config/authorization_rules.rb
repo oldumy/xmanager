@@ -1,14 +1,16 @@
 authorization do
   role :guest do
-    # add permissions for guests here, e.g.
-    #has_permission_on :conferences, :to => :read
+    has_permission_on :user_sessions, :to => :create
   end
 
   role :administrators do
+    has_permission_on :welcome, :to => :read
     has_permission_on :users, :to => :manage
   end
 
   role :product_owners do
+    has_permission_on :welcome, :to => :read
+    has_permission_on :user_sessions, :to => :manage
     has_permission_on :projects, :to => :manage
     has_permission_on :backlogs, :to => :manage
     has_permission_on :project_roles, :to => :manage
@@ -37,10 +39,9 @@ authorization do
 end
 
 privileges do
-  # default privilege hierarchies to facilitate RESTful Rails apps
   privilege :manage, :includes => [:create, :read, :update, :delete]
+  privilege :create, :includes => [:new, :create]
   privilege :read, :includes => [:index, :show]
-  privilege :create, :includes => :new
   privilege :update, :includes => [:show,:edit]
   privilege :delete, :includes => :destroy
 end

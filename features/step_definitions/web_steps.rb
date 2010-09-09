@@ -16,6 +16,14 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+Given /^a product owner is logged in as "([^"]*)" with password "([^"]*)"$/ do |login, password|
+  @current_user = Factory(login.to_sym)
+  visit "/user_session/new" 
+  fill_in("user_session[login]", :with => login) 
+  fill_in("user_session[password]", :with => password) 
+  click_button("user_session_submit")
+end
+
 Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
@@ -216,4 +224,8 @@ end
 
 Then /^show me the page$/ do
   save_and_open_page
+end
+
+Then /^I should have (\d+) project\(s\) named "([^"]*)"$/ do |count, project_name|
+  Project.where(:name => project_name).count.should == count.to_i
 end

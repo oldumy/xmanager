@@ -3,11 +3,8 @@
 # and open the template in the editor.
 
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
-require 'declarative_authorization/maintenance'
 
 describe BacklogsController do
-  include Authorization::TestHelper
-
   before(:all) do
     @admin = Factory.build(:user, :role => Factory.build(:role, :role_name => 'administrators'))
     @product_owners = Factory.build(:user, :role => Factory.build(:role, :role_name => 'product_owners'))

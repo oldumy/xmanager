@@ -1,3 +1,9 @@
+0.2
+
+* menu helper
+* config xmanager by config/xmanager.yml
+* add version tag 
+
 Release 0.1.1 :: Sep 6, 2010
 
 * tasks can be assigned to roles except administrators.

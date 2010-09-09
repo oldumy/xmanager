@@ -44,11 +44,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(@project, :notice => '创建项目成功.') }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
+        format.html { redirect_to(project_backlogs_url(@project)) }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end

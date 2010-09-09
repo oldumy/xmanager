@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe MenusHelper do
-  context "Generate top menus for administrators" do
+  describe "Generate top menus for administrators" do
     it "sets 'users' as the selected menu" do
       doc = Nokogiri::HTML.parse(menus(Factory(:admin), :users))
       nodes = doc.xpath('//div/ul/li/a[@class="selected"]')
@@ -10,9 +10,9 @@ describe MenusHelper do
     end
   end
 
-  context "Generate top menus for product managers" do
+  describe "Generate top menus for product owners" do
     before(:each) do
-      @doc = Nokogiri::HTML.parse(menus(Factory(:product_manager), :user_stories, '/projects/1'))
+      @doc = Nokogiri::HTML.parse(menus(Factory(:product_owner), :user_stories, '/projects/1'))
     end
 
     it "should have 5 menus" do
@@ -27,9 +27,9 @@ describe MenusHelper do
     end
   end
 
-  context "Generate top menus for project managers" do
+  describe "Generate top menus for scrum masters" do
     before(:each) do
-      @doc = Nokogiri::HTML.parse(menus(Factory(:project_manager), :user_stories))
+      @doc = Nokogiri::HTML.parse(menus(Factory(:scrum_master), :user_stories))
     end
 
     it "should have 5 menus" do
@@ -43,7 +43,7 @@ describe MenusHelper do
     end
   end
 
-  context "Generate top menus for developers" do
+  describe "Generate top menus for developers" do
     before(:each) do
       @doc = Nokogiri::HTML.parse(menus(Factory(:developer), :user_stories))
     end

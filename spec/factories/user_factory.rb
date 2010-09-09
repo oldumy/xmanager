@@ -7,20 +7,20 @@ Factory.define :admin, :class => User do |a|
   a.association :role, :factory => :administrators
 end
 
-Factory.define :product_manager, :class => User do |pm|
-  pm.login 'product_manager'
-  pm.name 'Product Manager'
+Factory.define :product_owner, :class => User do |pm|
+  pm.login 'product_owner'
+  pm.name 'Product Owner'
   pm.password '123456'
   pm.password_confirmation '123456'
-  pm.association :role, :factory => :product_managers
+  pm.association :role, :factory => :product_owners
 end
 
-Factory.define :project_manager, :class => User do |pm|
-  pm.login 'project_manager'
-  pm.name 'Project Manager'
+Factory.define :scrum_master, :class => User do |pm|
+  pm.login 'scrum_master'
+  pm.name 'Scrum Master'
   pm.password '123456'
   pm.password_confirmation '123456'
-  pm.association :role, :factory => :project_managers
+  pm.association :role, :factory => :scrum_masters
 end
 
 Factory.define :developer, :class => User do |d|

@@ -2,4 +2,13 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  menus:
+    users: Users
+  labels:
+    name: Name
+  models:
+    names:
+      project: Project
+  notices:
+    errors:
+      save: Save %{name} failed, %{count} error(s) found

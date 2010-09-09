@@ -1,6 +1,8 @@
-<%= content_for :menus do %>
-  <%= menus(current_user, :users) %>
-<% end %>
+<%= content_for :menus do
+  if current_user.role_symbols.include?(:administrators)
+    menus(current_user, :users)
+  end
+end %>
 
 <%= notice %> <br />
 <h1>欢迎 <%= @user.nil?? "来宾用户" : @user.login%>! </h1>

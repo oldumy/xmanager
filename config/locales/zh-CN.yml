@@ -151,6 +151,31 @@
 
   labels:
     name: 名称
+    description: 描述
+
+  buttons:
+    create: 创建
+    save: 保存
     
   pagination:
     per_page: 15
+
+  app:
+    copyright: "&copy; 2010 XManager 0.2 版权所有"
+
+  headers:
+    forms:
+      new_project: "创建项目"
+
+  models:
+    names:
+      project: "项目"
+
+  notices:
+    errors:
+      save: "创建%{name}失败，共有%{count}个错误"
+
+
+
+
+

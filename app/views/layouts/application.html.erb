@@ -30,13 +30,14 @@
           </ul>
         </div>
         <div id="header">
-          <%=generate_ul%>
+          <%= app_top_banner(@project) %>
+          <%= yield :menus %>
         </div>
         <div id="content">
           <%= yield %>
         </div>
         <div id="footer">
-          Powered by sibo&copy;2010
+          <%=raw t("app.copyright") %>
         </div>
       </div>
     </div>

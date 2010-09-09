@@ -5,14 +5,14 @@ Factory.define :administrators, :class => Role do |a|
   a.description 'Administrators of XManager' 
 end
 
-Factory.define :product_managers, :class => Role do |pm|
-  pm.role_name 'product_managers'
-  pm.description 'Product Managers' 
+Factory.define :product_owners, :class => Role do |pm|
+  pm.role_name 'product_owners'
+  pm.description 'Product owners' 
 end
 
-Factory.define :project_managers, :class => Role do |pm|
-  pm.role_name 'project_managers'
-  pm.description 'Project managers of a project' 
+Factory.define :scrum_masters, :class => Role do |pm|
+  pm.role_name 'scrum_masters'
+  pm.description 'Scrum masters of a project' 
 end
 
 Factory.define :developers, :class => Role do |d|

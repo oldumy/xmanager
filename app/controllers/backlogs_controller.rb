@@ -1,15 +1,12 @@
 # encoding: utf-8
 class BacklogsController < ApplicationController
-  filter_access_to :all
   before_filter :load_project
   # GET /backlogs
   # GET /backlogs.xml
   def index
-    backlogs = @project.backlogs.nil? ? []:@project.backlogs
-    @backlogs = backlogs.paginate :page => params[:page] || 1, :per_page => I18n.t("pagination.per_page")
+    @backlogs = @project.backlogs.paginate :page => params[:page] 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @backlogs }
     end
   end
 

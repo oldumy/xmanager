@@ -1,10 +1,12 @@
 defaults: &defaults
+  app:
+    title: XManager
   menus:
     administrators:
       -
         - "users"
         - "/users"
-    project_managers:
+    product_owners:
       - 
         - "user_stories"
         - "/backlogs"
@@ -20,6 +22,41 @@ defaults: &defaults
       -
         - "user_roles"
         - "/project_roles"
+
+    scrum_masters: 
+      - 
+        - "user_stories"
+        - "/backlogs"
+      -
+        - "new_user_story"
+        - "/backlogs/new"
+      -
+        - "tasks"
+        - "/tasks"
+      -
+        - "new_task"
+        - "/tasks/new"
+      -
+        - "user_roles"
+        - "/project_roles"
+
+    developers:
+      - 
+        - "user_stories"
+        - "/backlogs"
+      -
+        - "new_user_story"
+        - "/backlogs/new"
+      -
+        - "tasks"
+        - "/tasks"
+      -
+        - "new_task"
+        - "/tasks/new"
+      -
+        - "user_roles"
+        - "/project_roles"
+
 production:
   <<: *defaults
 
