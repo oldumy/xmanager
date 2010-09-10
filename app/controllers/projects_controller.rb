@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.xml
   def index
-    project_list
+    @projects = Project.order('name ASC').paginate :page => params[:page], :per_page => 10
   end
 
   # GET /projects/1
@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
-        format.html { redirect_to(project_backlogs_url(@project)) }
+        format.html { redirect_to(projects_url) }
       else
         format.html { render :action => "new" }
       end
@@ -58,11 +58,9 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
-        format.html { redirect_to(@project, :notice => 'Project was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(projects_url) }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -79,8 +77,4 @@ class ProjectsController < ApplicationController
     end
   end
   
-  private
-  def project_list
-    @projects = Project.paginate :page => params[:page] || 1, :per_page => I18n.t("pagination.per_page")
-  end
 end

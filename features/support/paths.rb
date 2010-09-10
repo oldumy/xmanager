@@ -12,6 +12,10 @@ module NavigationHelpers
       '/'
     when /the new project page/
       new_project_path
+    when /the list of projects/
+      projects_path
+    when /the edit project page/
+      edit_project_path(@project)
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

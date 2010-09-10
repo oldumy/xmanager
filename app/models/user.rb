@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   validates :role, :presence => true
   validates_length_of :name, :maximum => 40
   validates_length_of :login, :within => 3..40
+
   def role_symbols
-    @role_symbols ||= ([self.role.role_name.to_sym] ||[])
+    role.nil? ? [] : [role.role_name.to_sym]
   end
 end

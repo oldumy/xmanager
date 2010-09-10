@@ -35,6 +35,7 @@ RSpec.configure do |config|
 end
 
 def current_user(name = nil)
-  @current_user ||= Factory(name)
+  @@current_user = Factory(name) unless name.nil?
+  @@current_user
 end
 

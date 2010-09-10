@@ -22,6 +22,8 @@ authorization do
   end
 
   role :developers do
+    has_permission_on :welcome, :to => :read
+    has_permission_on :user_sessions, :to => :manage
     has_permission_on :projects, :to => :read
     has_permission_on :project_roles, :to => :read
     has_permission_on :sprints, :to => :read
@@ -31,11 +33,6 @@ authorization do
     has_permission_on :project_burn_down_charts, :to => :read
     has_permission_on :sprint_burn_down_charts, :to => :read
   end
-  
-  # permissions on other roles, such as
-  #role :admin do
-  #  has_permission_on :conferences, :to => :manage
-  #end
 end
 
 privileges do

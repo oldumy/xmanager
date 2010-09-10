@@ -216,7 +216,6 @@ body {
 }
 
 .form-wrapper {
-    background:#eee;
     padding: 10px;
     margin: 10px;
 }
@@ -253,3 +252,14 @@ body {
     padding-right: 30px;
 }
 
+#no-record-found {
+  padding: 10px;
+}
+
+.pagination {
+  margin: 30px 0px;
+}
+
+#bottom-buttons {
+  margin: 30px 0px;
+}

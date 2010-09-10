@@ -9,6 +9,7 @@ describe 'projects/new.html.erb' do
       form.should have_selector("input#project_name", :name => "project[name]")
       form.should have_selector("textarea#project_description", :name => "project[description]")
       form.should have_selector("button", :type => "submit")
+      form.should have_selector("a", :href => projects_path)
     end
   end
 end
