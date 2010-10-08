@@ -1,17 +1,47 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
+  app:
+    title: "XManager - A scrum management system."
+    copyright: "&copy; 2010 XManager 0.2 All rights reserved."
+
   buttons:
     add: Add
     back: Back
+    login: Login
     new: New
-    remove: Remove
+    new_release: New Release
+    new_sprint: New Sprint
     save: Save
-  menus:
-    users: Users
+    
+  headers:
+    candidates: Candidates
+    forms:
+      edit_product_backlog: Edit Product Backlog
+      edit_project: Edit Project
+      edit_release: Edit Release
+      edit_sprint: Edit Sprint
+      edit_task: Edit Task
+      edit_user: Edit User
+      edit_worklog: Edit Worklog
+      new_product_backlog: New Product Backlog
+      new_project: New Project
+      new_release: New Release
+      new_sprint: New Sprint
+      new_task: New Task
+      new_user: New User
+      new_worklog: New Worklog
+    lists:
+      released_releases: Listing Released Releases
+      users: Listing Users
+    team_members: Team Member
+
+  helpers:
+    submit:
+      create: Create
+      update: Update
+    
   labels:
     acceptance_criteria: Acceptance Criteria
+    account: Account
     assign_to: Assign To
     description: Description
     estimated_closed_on: Estimated Closed On
@@ -21,27 +51,51 @@ en:
     estimated_started_on: Estimated Started On
     estimated_story_points: Estimated Story Points
     estimated_story_points_template: Estimated Story Points(%{estimated_story_points})
+    ideal_burndown: "Ideal Burndown"
+    login: Login
     name: Name
+    password: Password
+    password_confirmation: Password Confirmation
     priority: Priority
     priority_template: Priority(%{priority})
+    real_burndown: Real Burndown
+    release: Release
     remaining_hours: Remaining Hours
     remaining_hours_template: Remaining Hours(%{remaining_hours})
+    role: Role
+    story_points: Story Points
     worklogs_count_template: Logs(%{worklogs_count})
+
+  menus:
+    burndown_charts: Burndown Charts
+    homepage: Home
+    product_backlogs: Product Backlogs
+    project_plannings: Project Planning
+    projects: Projects
+    sprint_backlogs: Sprint Backlogs
+    team_members: Team Members
+    users: Users
+
   links:
     add_product_backlog: Add Product Backlog
     close: Close
-    edit: Edit
     delete: Delete
+    edit: Edit
     log: Log
+    login: Login
+    logout: Logout
     new_task: New Task
     new_sprint: New Sprint
+    profile: Profile
     release: Release
     reopen: Reopen
     start: Start
     turnback: Turn Back
+
   models:
     names:
       project: Project
+
   notices:
     close: Are you sure?
     delete: Are you sure?
@@ -57,3 +111,13 @@ en:
     sprint_not_started: No sprint backlog found.
     start: Are you sure?
     turnback: Are you sure?
+
+  titles:
+    name: Name
+    project_burndown_chart: Project Burndown Chart
+    sprint_burndown_chart: Sprint Burndown Chart 
+
+  will_paginate:
+    previous_page: Prev Page
+    next_page: Next Page
+
