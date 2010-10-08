@@ -244,6 +244,7 @@
     delete: "确认需要删除吗？"
     errors:
       save: "创建%{name}失败，共有%{count}个错误"
+    login_successfully: "登录成功"
     no_record_found: "没有记录"
     not_released: "没有定义Sprint，或者存在未关闭的Sprint"
     product_backlog_not_closed: "没有任务存在，或者存在一个未关闭的任务"
@@ -255,6 +256,13 @@
     start: "确认需要开始吗？"
     started: "进行中..."
     turnback: "确认需要打回吗？"
+    welcome: "欢迎"
+
+  roles:
+    administrators: "系统管理员"
+    product_owners: "产品负责人"
+    scrum_masters: "Scrum负责人"
+    developers: "开发人员"
 
   titles:
     name: "名称"

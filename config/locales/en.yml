@@ -101,6 +101,7 @@ en:
     delete: Are you sure?
     errors:
       save: Save %{name} failed, %{count} error(s) found
+    login_successfully: Login successfully.
     no_record_found: No record found.
     not_released: No sprint exists, or some sprints are not closed.
     product_backlog_not_closed: No task found or a task is still open.
@@ -111,6 +112,13 @@ en:
     sprint_not_started: No sprint backlog found.
     start: Are you sure?
     turnback: Are you sure?
+    welcome: Welcome
+
+  roles:
+    administrators: Administrators
+    product_owners: Product Owners
+    scrum_masters: Scrum Masters
+    developers: Developers
 
   titles:
     name: Name

@@ -1,4 +1,3 @@
-# encoding: utf-8
 class UserSessionsController < ApplicationController
   skip_before_filter :require_user, :except => :destroy
 
@@ -9,7 +8,7 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new params[:user_session]
     if @user_session.save
-      flash[:notice] = '登录成功!'
+      flash[:notice] = t("notices.login_successfully")
       redirect_to root_path
     else
       render 'new'

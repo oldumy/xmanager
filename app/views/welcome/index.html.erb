@@ -1,2 +1,2 @@
-<h1>欢迎 <%= @user.nil?? "来宾用户" : @user.login%>! </h1>
+<h1><%= t("notices.welcome") %> <%= current_user.name %> </h1>
 

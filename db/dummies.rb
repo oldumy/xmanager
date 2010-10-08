@@ -5,7 +5,6 @@ developers = Role.find_by_role_name("developers")
 tower = User.create!(:login => 'tower', :name => "Tower He", :password => '123456', :password_confirmation => '123456', :role => product_owners)
 venus = User.create!(:login => 'venus', :name => "Venus", :password => '123456', :password_confirmation => '123456', :role => scrum_masters)
 jessimine = User.create!(:login => 'jessimine', :name => "Jessimine He", :password => '123456', :password_confirmation => '123456', :role => developers)
-yanny = User.create!(:login => 'yanny', :name => "Yanny yang", :password => '123456', :password_confirmation => '123456', :role => developers)
 
 xmanager = Project.create!(:name => "XManager", :description => "XManager is a scrum management system.", :creater => tower)
 
