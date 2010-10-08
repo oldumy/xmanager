@@ -1,38 +1,30 @@
 class Task < ActiveRecord::Base
-  belongs_to :project
-  belongs_to :sprint
-  belongs_to :user
-  has_many :task_histories, :dependent => :destroy
+  belongs_to :team_member
+  belongs_to :product_backlog
+  has_many :worklogs, :dependent => :destroy
 
-  validates :name, :presence => true, :uniqueness => {:scope => :project_id}
-  validates :workload, :numericality => {:greater_than => 0}, :allow_nil => true
-  validates :surplus_workload, :numericality => true, :allow_nil => true
+  scope :unclosed, where("closed_on IS NULL")
 
-  def update_task_progress(attr_list)
-    if self.workload < attr_list[:surplus_workload].to_f
-      self.errors[:surplus_workload] << 'cannot greater than workload'
-    else
-      begin
-        if self.update_attributes(attr_list)
-          update_history(Time.now.to_date);
-          return true
-        end
-      rescue Exception
-      end
-    end
-    return false
+  validates :name, :presence => true, :length => { :within => 1..100 }
+  validates :product_backlog, :presence => true
+
+  def remaining_hours
+    worklogs.exists? ? worklogs.last.remaining_hours : estimated_hours
   end
 
-  private
+  def closable?
+    worklogs.exists? && worklogs.last.remaining_hours == 0
+  end
 
-  def update_history(date)
-    histories = self.task_histories
-    history = histories.detect { |h| h.date == date }
-    surplus_workload = self.surplus_workload
-    if history.nil?
-      TaskHistory.create(:date => date, :task => self, :surplus_workload => surplus_workload)
-    else
-      history.update_attribute(:surplus_workload, surplus_workload)
-    end
+  def close
+    closable? ? update_attribute(:closed_on, Time.now.to_date) : false
+  end
+
+  def closed?
+    not closed_on.nil?
+  end
+
+  def reopen
+    update_attribute(:closed_on, nil)
   end
 end

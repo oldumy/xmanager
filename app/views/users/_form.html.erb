@@ -1,0 +1,34 @@
+<%= form_for(user) do |f| %>
+  <%= errors_of(user) %>
+  <div class="fields">
+    <p>
+      <%= f.label :login, t("labels.login") %>
+      <%= f.text_field :login %>
+    </p>
+    <p>
+      <%= f.label :name, t("labels.name") %>
+      <%= f.text_field :name %>
+    </p>
+    <p>
+      <%= f.label :password, t("labels.password")  %>
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation, t("labels.password_confirmation")  %>
+      <%= f.password_field :password_confirmation %>
+    </p>
+    <%  if @current_user.administrators? %>
+      <p>
+        <%= f.label :role_id, t("labels.role")  %>
+        <%= f.collection_select(:role_id,Role.find(:all,:order=>:description),:id,:description) %>
+      </p>
+    <%  end %>
+  </div>
+  <div class="actions">
+    <%= sexybutton(t("buttons.save")) do |b|
+      b.type = 'submit'
+      b.image = 'save'
+    end %>
+  </div>
+<% end %>
+

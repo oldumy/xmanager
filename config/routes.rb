@@ -1,29 +1,50 @@
 Xmanager::Application.routes.draw do
+
   get "project_burn_down_charts/index"
 
   get "sprint_burn_down_chart/index"
 
-  resources :project_roles
-  
-  get "welcome/index"
   match 'signin' => 'user_sessions#new'
-  resources :projects do
-    resources :project_roles
-    resources :project_burn_down_charts
-    resources :sprints do
-      resources :sprint_burn_down_charts
-      resources :tasks
-    end
-  end
+
   resources :users
   resource :user_session
   root :to => "welcome#index"
+
   resources :projects do
-    resources :backlogs
-    resources :tasks
+    resources :burndown_charts
+    resources :product_backlogs
+    resources :project_plannings
+    resources :releases
+    resources :sprints do
+      get 'on_air', :on => :collection
+    end
+    resources :team_members
   end
-  resources :sprints do
+
+  resources :product_backlogs do 
     resources :tasks
+    put 'close', :on => :member
+    put 'reopen', :on => :member
+  end
+
+  resources :releases do
+    put 'release', :on => :member
+    put 'turnback', :on => :member
+    resources :sprints
+  end
+
+  resources :sprints do
+    put 'close', :on => :member
+    put 'reopen', :on => :member
+    put 'start', :on => :member
+
+    resources :sprint_backlogs
+  end
+
+  resources :tasks do
+    put 'close', :on => :member
+    put 'reopen', :on => :member
+    resources :worklogs
   end
 
   # The priority is based upon order of creation:

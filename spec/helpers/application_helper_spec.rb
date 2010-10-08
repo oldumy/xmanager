@@ -13,12 +13,25 @@ describe ApplicationHelper do
   end
 
   it "should generate a valid error box" do
-    project = Project.new
-    project.save
+    class TestModel
+      include ActiveModel::Validations
+      attr_accessor :name
+      validates :name, :presence => true
+    end
+    model = TestModel.new
+    model.valid?.should be_false
     error_box = <<-ERROR_BOX
-<div id="error_explanation"><h2>Save Project failed, 1 error(s) found</h2><ul><li><label>Name</label> can't be blank</li></ul></div>
+<div id=\"error_explanation\"><h2>Save &lt;span class=&quot;translation_missing&quot;&gt;en, models, names, test_model&lt;&#47;span&gt; failed, 1 error(s) found</h2><ul><li><label>Name</label> can&#39;t be blank</li></ul></div>
     ERROR_BOX
 
-    errors_of(project).should == error_box.chop
+    errors_of(model).should == error_box.chop
+  end
+
+  it "should render a no record found notice" do
+    no_record_found(true).should == "<p id=\"no-record-found\">No record found.</p>"
+  end
+
+  it "should not render a no record found notice" do
+    no_record_found(false).should == ""
   end
 end

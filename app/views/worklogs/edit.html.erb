@@ -1,0 +1,8 @@
+<%= content_for :menus do
+  menus(current_user, :sprint_backlogs, "/projects/#{@worklog.task.product_backlog.project.id}")
+end %>
+
+<div class="form-wrapper">
+  <h1><%= t("headers.forms.edit_worklog") %></h1>
+  <%= render :partial => 'form', :locals => { :worklog => @worklog } %>
+</div>

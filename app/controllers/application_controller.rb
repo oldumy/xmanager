@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_filter :require_user
   filter_access_to :all
-  protect_from_forgery
+  #protect_from_forgery
 
   helper_method :current_user_session, :current_user
 
@@ -25,7 +25,6 @@ class ApplicationController < ActionController::Base
   def require_user
     unless current_user
       store_location
-      flash[:notice] = t("notices.login_required")
       redirect_to new_user_session_url
       return false
     end
@@ -34,7 +33,6 @@ class ApplicationController < ActionController::Base
   def require_no_user
     if current_user
       store_location
-      flash[:notice] = "You must be logged out to access this page"
       redirect_to user_url(current_user)
       return false
     end

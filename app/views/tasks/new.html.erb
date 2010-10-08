@@ -1,37 +1,8 @@
+<%= content_for :menus do
+  menus(current_user, :sprint_backlogs, "/projects/#{@task.product_backlog.project.id}")
+end %>
+
 <div class="form-wrapper">
-  <h1>新建任务</h1>
-
-  <%= form_for(@task, :url => project_tasks_path(@project)) do |f| %>
-    <% if @task.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-        <ul>
-          <% @task.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label '名称' %><br />
-      <%= f.text_field :name %>
-    </div>
-    <div class="field">
-      <%= f.label '指派给' %><br />
-      <%= f.collection_select(:user_id, @developers, :id, :name, { :include_blank => true }) %>
-    </div>
-    <div class="field">
-      <%= f.label '工作量' %><br />
-      <%= f.text_field :workload %>
-    </div>
-    <div class="field">
-      <%= f.label '描述' %><br />
-      <%= f.text_area :description %>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
+  <h1><%= t("headers.forms.new_task") %></h1>
+  <%= render :partial => 'form', :locals => { :task => @task } %>
 </div>

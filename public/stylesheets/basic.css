@@ -1,22 +1,20 @@
 body {
-    background-attachment:scroll;
-    background-color:#F1EFE2;
-    background-image:none;
-    background-position:0 0;
-    background-repeat:repeat;
-    font-family:Verdana,sans-serif;
-    color:#484848;
-    font-family:Verdana,sans-serif;
-    font-size:14px;
-    margin-bottom:0;
-    margin-left:0;
-    margin-right:0;
-    margin-top:0;
-    min-width:900px;
-    padding-bottom:0;
-    padding-left:0;
-    padding-right:0;
-    padding-top:0;
+  padding: 0px 0px;
+  margin: 0px 0px;
+  background-attachment:scroll;
+  background-color:#F1EFE2;
+  background-image:none;
+  background-position:0 0;
+  background-repeat:repeat;
+  font-family:Verdana,sans-serif;
+  color:#484848;
+  font-family:Verdana,sans-serif;
+  font-size:14px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
 }
 
 .field_with_errors {
@@ -183,10 +181,11 @@ body {
 }
 
 #content {
-    margin:auto;
-    width:90%;
-    z-index:10;
-    min-height:600px;
+  padding: 10px; 
+  margin:auto;
+  width:90%;
+  z-index:10;
+  min-height:600px;
 }
 #content table {
     border-width: 1px 0 0 1px;
@@ -262,4 +261,188 @@ body {
 
 #bottom-buttons {
   margin: 30px 0px;
+}
+
+#candidates form p label {
+  display: inline;
+}
+
+h1 {
+  margin: 0px 0px;
+  padding: 10px;
+}
+
+h1 span {
+  font-size: 12px;
+  color: #777;
+}
+
+h1 span.red {
+  color: #ad4d65;
+}
+
+h1 span.deleted {
+  text-decoration: line-through;
+}
+
+h1 span.actions {
+  float: right;
+}
+
+.release {
+  border: 1px solid #ccc;
+  margin: 5px 0px;
+}
+
+.release > h1 {
+  background: #ccc;
+}
+
+.sprint {
+  border: 1px solid #ccc;
+}
+
+.sprint > h1 {
+  font-size: 18px;
+  background: #ddd;
+}
+
+.sprint-backlog > h1 {
+  font-size: 14px;
+  background: #eee;
+}
+
+.sprint-backlog p {
+  padding: 0px 20px;
+}
+
+.product-backlog {
+  border: 1px solid #ccc;
+  margin: 5px 0px;
+}
+
+.product-backlog > h1 {
+  font-size: 14px;
+  background: #ccc;
+}
+
+.product-backlog p {
+  padding: 0px 20px;
+}
+
+.task > h1 {
+  background: #f77;
+}
+
+.onair {
+  border: 1px solid #c00;
+}
+
+.onair > h1 {
+  background: #c00;
+}
+
+.onair > h1 > span.red {
+  color: #fff;
+}
+
+.onair > h1 > span.actions a {
+  color: #fff;
+}
+
+.onair .sprint-backlog > h1 {
+  background: #e00;
+}
+
+.onair .sprint-backlog > h1 > span.actions a {
+  color: #fff;
+}
+
+.closable {
+  border: 1px solid #ff0;
+}
+
+.closable > h1 {
+  background: #ff0;
+}
+
+.closable.sprint-backlog > h1 {
+  background: #ff0;
+}
+
+.closable h1 > span.red {
+  color: #ad4d65;
+}
+
+.closable h1 > span.actions a {
+  color: #888;
+}
+
+.closed {
+  border: 1px solid #8f0;
+}
+
+.closed > h1 {
+  background: #0c0;
+}
+
+.closed > h1 > span {
+  color: #fff;
+}
+
+.closed.sprint-backlog > h1 {
+  background: #8f0;
+}
+
+.closed.task > h1 {
+  background: #af0;
+}
+
+.closed h1 > span.red {
+  color: #ad4d65;
+}
+
+.closed h1 > span.actions a {
+  color: #888;
+}
+
+.closed.sprint h1 > span.actions a {
+  color: #fff;
+}
+
+.released > h1 {
+  background: #0a0;
+}
+
+.released > h1 > span.actions a {
+  color: #fff;
+}
+
+#notices {
+  padding: 30px;
+  background: yellow;
+  color: #ad4d65;
+  font-weight: bold;
+  margin: auto;
+}
+
+.panel {
+  border: 1px solid #ccc;
+  margin: 5px 0px;
+}
+
+.panel > h1 {
+  background: #ccc;
+}
+
+.panel p {
+  padding: 0px 20px;
+}
+
+.highcharts {
+  text-align: center;
+  border: 1px solid #ccc;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin: 10px;
 }

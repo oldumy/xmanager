@@ -1,0 +1,83 @@
+<div id="release-<%= release.id %>" class="release <%= "closable" if release.releasable? %> <%= "released" if release.released? %>">
+  <h1>
+    <%= release.name %>
+    <% if release.released? %>
+      <span class="red"><%= release.released_on %></span> 
+      <span class="deleted"><%= release.estimated_released_on %></span> 
+    <% else %>
+      <span class="red"><%= release.estimated_released_on %></span> 
+    <% end %>
+    <span><%= release.description %></span>
+    <% if current_user.product_owners? %>
+      <span class="actions">
+        <% if release.released? %>
+          <%= link_to t("links.turnback"), turnback_release_path(release), :confirm => t("notices.turnback"), :method => 'put' %>
+        <% else %>
+          <%= link_to t("links.release"), release_release_path(release), :confirm => t("notices.release"), :method => 'put' %> | 
+          <%= link_to t("links.new_sprint"), new_release_sprint_path(release) %> | 
+          <%= link_to t("links.edit"), edit_release_path(release) %> | 
+          <%= link_to t("links.delete"), release_path(release), :confirm => t("notices.delete"), :method => 'delete' %>
+        <% end %>
+      </span>
+    <% end %>
+  </h1>
+  <div class="sprints">
+    <% release.sprints.each do |sprint| %>
+      <div id="sprint-<%= sprint.id %>" class="sprint <%= "onair" if sprint.on_air? %> <%= "closable" if sprint.closable? %> <%="closed" if sprint.closed? %>">
+        <h1>
+          <%= sprint.name %>
+          <% if sprint.closed? %>
+            <span class="red"><%= "#{sprint.started_on}..#{sprint.closed_on}" %></span> 
+            <span class="deleted"><%= "#{sprint.estimated_started_on}..#{sprint.estimated_closed_on}" %></span> 
+          <% else %>
+            <span class="red"><%= "#{sprint.estimated_started_on}..#{sprint.estimated_closed_on}" %></span> 
+          <% end %>
+          <span><%= sprint.description %></span>
+          <% if current_user.product_owners? %>
+            <span class="actions">
+              <% if sprint.closed? %>
+                <% if release.project.sprints.on_air.nil? %>
+                  <%= link_to t("links.reopen"), reopen_sprint_path(sprint), :confirm => t("notices.reopen"), :method => 'put' %>
+                <% end %>
+              <% else %>
+                <%= link_to t("links.add_product_backlog"), new_sprint_sprint_backlog_path(sprint) %> | 
+                <% if release.project.sprints.on_air.nil? %>
+                  <%= link_to t("links.start"), start_sprint_path(sprint), :confirm => t("notices.start"), :method => 'put' %> | 
+                <% end %>
+                <%= link_to t("links.edit"), edit_sprint_path(sprint) %> | 
+                <%= link_to t("links.delete"), sprint_path(sprint), :confirm => t("notices.delete"), :method => 'delete' %>
+              <% end %>
+            </span>
+          <% end %>
+        </h1>
+        <div class="sprint-backlogs">
+          <% sprint.sprint_backlogs.each do |backlog| %>
+            <div id="sprint-backlog-<%= backlog.id %>" class="sprint-backlog <%= "closed" if backlog.product_backlog.closed? %>">
+              <h1>
+                <%= backlog.product_backlog.name %>
+                <span><%= t("labels.priority_template", :priority => backlog.product_backlog.priority) %> <%= t("labels.estimated_story_points_template", :estimated_story_points => backlog.product_backlog.estimated_story_points) %></span>
+                <% if current_user.role_symbols.include?(:product_owners) %>
+                  <% unless sprint.closed? %>
+                    <span class="actions">
+                      <%= link_to t("links.edit"), edit_project_product_backlog_path(release.project, backlog.product_backlog) %> | 
+                      <%= link_to t("links.delete"), sprint_sprint_backlog_path(backlog.sprint, backlog), :confirm => t("notices.delete"), :method => 'delete' %>
+                    </span>
+                  <% end %>
+                <% end %>
+              </h1>
+              <p>
+                <label><%= t("labels.description") %></label>
+                <%= backlog.product_backlog.description %>
+              </p>
+              <p>
+                <label><%= t("labels.acceptance_criteria") %></label>
+                <%= backlog.product_backlog.acceptance_criteria %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+

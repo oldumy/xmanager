@@ -1,38 +1,84 @@
 require 'spec_helper'
 
 describe Task do
-  describe 'Task validations' do
-    it 'should have a name' do
-      validates_presence_of :name
+  describe 'Validation' do
+    describe 'Name' do
+      before(:each) do
+        @task = Task.new
+      end
+
+      it 'should not be nil' do
+        @task.should have(2).errors_on(:name)
+      end
+
+      it 'should have at least 1 character' do
+        @task.name = ''
+        @task.should have(2).errors_on(:name)
+      end
+
+      it 'should be valid' do
+        @task.name = 'a'
+        @task.should have(:no).error_on(:name)
+      end
+
+      it 'should have no more than 100 characters' do
+        @task.name = 'a' * 101
+        @task.should have(1).error_on(:name)
+      end
     end
 
-    it 'should have a unique name' do
-      task = Factory.build(:task, :name => Factory(:task).name)
-      task.should_not be_valid
-      task.should have(1).errors_on(:name)
-    end
-
-    private
-
-    def validates_presence_of(attr)
-        task = Factory.build(:task, attr.to_sym => nil, :user => Factory(:user, :login => 'iii.gaols'))
-        task.should_not be_valid
+    it 'should belong to a product backlog' do
+      task = Task.new
+      task.should have(1).error_on(:product_backlog)
     end
   end
 
-  describe 'Update progress of a task' do
-    it 'should update progress correctly' do
-      task = Factory(:task)
-      params = {
-        :id => task.id,
-        :task => {
-          :progress => 20,
-          :surplus_workload => 2
-        }
-      }
-      task.update_task_progress(params[:task]).should be_true
-      TaskHistory.all.should have(1).tasks
-      TaskHistory.first.date.should == Time.now.to_date
+  describe 'close' do
+    before(:each) do
+      @task = Factory(:task)
+    end
+
+    it 'is not closable if no worklog' do
+      @task.worklogs.should_receive(:exists?).and_return(false)
+      @task.closable?.should be_false
+    end
+
+    it 'is not closable if not be done' do
+      @task.worklogs.should_receive(:exists?).and_return(true)
+      @task.worklogs.stub_chain(:last, :remaining_hours).and_return(1)
+      @task.closable?.should be_false
+    end
+
+    it 'is closable' do
+      @task.worklogs.should_receive(:exists?).and_return(true)
+      @task.worklogs.stub_chain(:last, :remaining_hours).and_return(0)
+      @task.closable?.should be_true
+    end
+
+    it 'should not be closed' do
+      @task.should_receive(:closable?).and_return(false)
+      @task.close.should be_false
+      @task.closed?.should be_false
+    end
+
+    it 'should be closed' do
+      @task.should_receive(:closable?).and_return(true)
+      @task.close.should be_true
+      @task.closed?.should be_true
+    end
+  end
+
+  describe 'reopen' do
+    before(:each) do
+      @task = Factory(:task)
+    end
+
+    it 'should be reopened' do
+      @task.should_receive(:closable?).and_return(true)
+      @task.close
+
+      @task.reopen
+      @task.closed?.should be_false
     end
   end
 end

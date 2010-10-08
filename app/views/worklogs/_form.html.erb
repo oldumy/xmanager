@@ -1,0 +1,22 @@
+<%= form_for([worklog.task, worklog]) do |f| %>
+  <%= errors_of(worklog) %>
+  <div class="fields">
+    <p>
+      <label for="worklog_remaining_hours"><%= t("labels.remaining_hours") %></label>
+      <%= f.text_field :remaining_hours %>
+    </p>
+    <p>
+      <label for="worklog_description"><%= t("labels.description") %></label>
+      <%= f.text_area :description %>
+    </p>
+  </div>
+  <div class="buttons">
+    <%= sexybutton(t("buttons.save")) do |b|
+      b.type = 'submit'
+      b.image = 'save'
+    end %>
+    <%= sexybutton(t("buttons.back"), on_air_project_sprints_path(worklog.task.product_backlog.project)) do |b|
+      b.image = 'back'
+    end %>
+  </div>
+<% end %>

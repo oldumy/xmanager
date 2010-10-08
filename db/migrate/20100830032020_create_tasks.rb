@@ -1,14 +1,12 @@
 class CreateTasks < ActiveRecord::Migration
   def self.up
     create_table :tasks do |t|
-      t.string :name
+      t.string :name, :null => false, :limit => 100
+      t.integer :estimated_hours
+      t.date :closed_on
       t.text :description
-      t.integer :user_id
-      t.float :workload
-      t.float :progress
-      t.float :surplus_workload
-      t.integer :project_id
-      t.integer :sprint_id
+      t.belongs_to :team_member
+      t.belongs_to :product_backlog, :null => false
 
       t.timestamps
     end

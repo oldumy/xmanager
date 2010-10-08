@@ -1,0 +1,36 @@
+<%= content_for :menus do
+  menus(current_user, :team_members, "/projects/#{@project.id}")
+end %>
+
+<% unless @project.team_members.empty? %>
+  <div id="team-members" class="panel">
+    <h1><%= t("headers.team_members") %></h1>
+    <p>
+      <% @project.team_members.each do |member| %>
+        <span><%= link_to member.user.name, project_team_member_path(@project, member), :confirm => t("notices.delete"), :method => 'delete' %></span>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<% unless @candidates.empty? %>
+  <div id="candidates" class="panel">
+    <h1><%= t("headers.candidates") %></h1>
+    <form id="candidates-form" name="candidates-form" action="<%= project_team_members_path(@project) %>" method="post">
+      <p>
+        <% @candidates.each do |candidate| %>
+          <label>
+            <input name="candidates[]" type="checkbox" value="<%= candidate.id %>">
+            <%= candidate.name %>
+          </label>
+        <% end %>
+      </p>
+      <p>
+        <%= sexybutton(t("buttons.add")) do |b|
+          b.type = 'submit'
+          b.image = 'save'
+        end %>
+      </p>
+    </form>
+  </div>
+<% end %>

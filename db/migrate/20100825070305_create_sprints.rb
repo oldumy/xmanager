@@ -1,10 +1,11 @@
 class CreateSprints < ActiveRecord::Migration
   def self.up
     create_table :sprints do |t|
-      t.string :name
-      t.date :start_time
-      t.date :end_time
-      t.references :project
+      t.string :name, :null => false, :limit => 100
+      t.date :started_on, :null => false
+      t.date :closed_on, :null => false
+      t.text :description
+      t.belongs_to :release, :null => false
       
       t.timestamps
     end

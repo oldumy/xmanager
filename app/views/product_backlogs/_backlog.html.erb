@@ -1,0 +1,21 @@
+<div id="product-backlog-<%= backlog.id %>" class="product-backlog">
+  <h1>
+    <%= backlog.name %>
+    <span><%= t("labels.priority_template", :priority => backlog.priority) %></span> 
+    <span><%= t("labels.estimated_story_points_template", :estimated_story_points => backlog.estimated_story_points) %></span>
+    <% if current_user.product_owners? %>
+      <span class="actions">
+        <%= link_to t("links.edit"), edit_product_backlog_path(backlog) %> | 
+        <%= link_to t("links.delete"), product_backlog_path(backlog), :confirm => t("notices.delete"), :method => 'delete' %>
+      </span>
+    <% end %>
+  </h1>
+  <p>
+    <label><%= t("labels.description") %></label>
+    <%= backlog.description %>
+  </p>
+  <p>
+    <label><%= t("labels.acceptance_criteria") %></label>
+    <%= backlog.acceptance_criteria %>
+  </p>
+</div>

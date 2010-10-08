@@ -142,46 +142,124 @@
           other: "有 %{count} 个错误发生导致「%{model}」无法被保存。"
         body: "如下字段出现错误："
   
+  app:
+    title: "XManager - Scrum管理系统"
+    copyright: "&copy; 2010 XManager 0.2 版权所有"
+
+  buttons:
+    add: 添加
+    back: 返回
+    login: "登录"
+    new: 新建
+    new_release: 制定发布
+    new_sprint: 制定Sprint
+    save: 保存
+    
+  headers:
+    candidates: "候选成员"
+    forms:
+      edit_product_backlog: "编辑产品待办事项"
+      edit_project: "编辑项目"
+      edit_release: "编辑发布"
+      edit_sprint: "编辑Sprint"
+      edit_task: "编辑任务"
+      edit_user: "编辑用户"
+      edit_worklog: "编辑工作日志"
+      new_product_backlog: "创建产品待办事项"
+      new_project: "创建项目"
+      new_release: "制定发布"
+      new_sprint: "制定Sprint"
+      new_task: "添加任务"
+      new_user: "添加用户"
+      new_worklog: "添加工作日志"
+    lists:
+      released_releases: "已发布"
+      users: "用户列表"
+    team_members: "团队成员"
+
   helpers:
     submit:
       create: "创建"
       update: "更新"
-  titles:
-    name: 名称
-
-  labels:
-    name: 名称
-    description: 描述
-
-  buttons:
-    back: "返回"
-    new: "新建"
-    save: 保存
     
-  pagination:
-    per_page: 15
-
-  app:
-    copyright: "&copy; 2010 XManager 0.2 版权所有"
-
-  headers:
-    forms:
-      new_project: "创建项目"
-      edit_project: "编辑项目"
+  labels:
+    acceptance_criteria: "验收条件"
+    account: "帐号"
+    assign_to: "指派给"
+    description: "描述"
+    estimated_closed_on: "计划关闭日期"
+    estimated_hours: "估计用时"
+    estimated_hours_template: "估计用时(%{estimated_hours})"
+    estimated_released_on: "计划发布日期"
+    estimated_started_on: "计划开始日期"
+    estimated_story_points: "故事点"
+    estimated_story_points_template: "故事点(%{estimated_story_points})"
+    ideal_burndown: "计划燃尽曲线"
+    login: "用户名"
+    name: "名称"
+    password: "密码"
+    password_confirmation: "密码确认"
+    priority: "优先级"
+    priority_template: "优先级(%{priority})"
+    real_burndown: "实际燃尽曲线"
+    release: "发布"
+    remaining_hours: "剩余时间"
+    remaining_hours_template: "剩余时间(%{remaining_hours})"
+    role: "角色"
+    story_points: "故事点"
+    worklogs_count_template: "日志(%{worklogs_count})"
 
   links:
-    edit: "编辑"
+    add_product_backlog: "添加事项"
+    close: "关闭"
     delete: "删除"
+    edit: "编辑"
+    log: "登记"
+    login: "登录"
+    logout: "注销"
+    new_sprint: "制定Sprint"
+    new_task: "新任务"
+    profile: "个人信息"
+    release: "发布"
+    reopen: "重开"
+    start: "开始"
+    turnback: "打回"
+
+  menus:
+    burndown_charts: "燃尽图"
+    homepage: "主页" 
+    product_backlogs: "待办事项"
+    project_plannings: "计划" 
+    projects: "项目"
+    sprint_backlogs: "Sprint待办事项"
+    team_members: "成员"
+    users: "用户"
 
   models:
     names:
       project: "项目"
 
   notices:
+    close: "确认需要关闭吗？"
     delete: "确认需要删除吗？"
-    no_record_found: "没有记录"
     errors:
       save: "创建%{name}失败，共有%{count}个错误"
+    no_record_found: "没有记录"
+    not_released: "没有定义Sprint，或者存在未关闭的Sprint"
+    product_backlog_not_closed: "没有任务存在，或者存在一个未关闭的任务"
+    project_not_started: "项目还未启动"
+    release: "确认需要发布吗？"
+    reopen: "确认需要重开吗？"
+    sprint_not_closed: "存在尚未关闭的Sprint待办事项"
+    sprint_not_started: "没有添加待办事项到该Sprint"
+    start: "确认需要开始吗？"
+    started: "进行中..."
+    turnback: "确认需要打回吗？"
+
+  titles:
+    name: "名称"
+    project_burndown_chart: "项目燃尽图"
+    sprint_burndown_chart: "Sprint燃尽图"
 
   will_paginate:
     previous_page: 上一页

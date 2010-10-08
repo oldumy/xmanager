@@ -1,37 +1,8 @@
-<div class="form-wrapper">
-  <h1>新的迭代</h1>
+<%= content_for :menus do
+  menus(current_user, :project_plannings, "/projects/#{@sprint.release.project.id}")
+end %>
 
-  <% form_for([@project, @sprint]) do |f| %>
-    <% if @sprint.errors.any? %>
-      <div id="errorExplanation">
-        <ul>
-          <% @sprint.errors.each do |attr, msg| %>
-            <li>
-              <% unless attr.blank? %>
-                <label><%= t("labels.#{attr.downcase}") %></label>
-                <%=  " - #{msg}"%>
-              <% else %>
-                <%= msg %>
-              <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <p>
-      <%= f.label :名称 %><br />
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :开始时间 %><br />
-      <%= f.date_select :start_time %>
-    </p>
-    <p>
-      <%= f.label :结束时间 %><br />
-      <%= f.date_select :end_time %>
-    </p>
-    <p>
-      <%= f.submit "创建" %>
-    </p>
-  <% end %>
+<div class="form-wrapper">
+  <h1><%= t("headers.forms.new_sprint") %></h1>
+  <%= render :partial => 'form', :locals => { :sprint => @sprint } %>
 </div>

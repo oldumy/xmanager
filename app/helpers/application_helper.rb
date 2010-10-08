@@ -3,6 +3,10 @@ module ApplicationHelper
     content_tag(:h1, project.nil? || project.name.blank? ? Settings.app.title : project.name)
   end
 
+  def no_record_found(needed)
+    needed ? content_tag(:p, t("notices.no_record_found"), :id => 'no-record-found') : ''
+  end
+
   def errors_of(model)
     if model.errors.any?
       content_tag(:div, :id => 'error_explanation') do

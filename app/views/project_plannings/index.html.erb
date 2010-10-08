@@ -1,0 +1,24 @@
+<%= content_for :menus do
+  menus(current_user, :project_plannings, "/projects/#{@project.id}")
+end %>
+
+<div id="releases">
+  <% @project.releases.unreleased.each do |release| %>
+    <%= render :partial => 'release', :locals => { :release => release } %>
+  <% end %>
+</div>
+
+<div id="bottom-buttons">
+  <% if current_user.product_owners? %>
+    <%= sexybutton(t("buttons.new_release"), new_project_release_path(@project)) do |b|
+      b.image = 'add'
+    end %>
+  <% end %>
+</div>
+
+<div id="released-releases">
+  <% @project.releases.released.each do |release| %>
+    <h1><%= t("headers.lists.released_releases") %></h1>
+    <%= render :partial => 'release', :locals => { :release => release } %>
+  <% end %>
+</div>

@@ -1,31 +1,19 @@
-# encoding : utf-8
 class SprintsController < ApplicationController
-  include PaintAssistent
+  before_filter :load_sprint, :except => [:new, :create, :on_air]
   
-  filter_access_to :all
-  before_filter :load_project
-  before_filter :load_sprint, :except => [:index, :new, :create]
-  
-  def index
-    @sprints = @project.sprints
-  end
-
-  def show
-    @data = gen_sprint_burn_down_data(@sprint)
-  end
-
   def new
-    @sprint = @project.sprints.build
-    @new_sprint = nil
+    release = Release.find(params[:release_id])
+    @sprint = release.sprints.build
   end
 
   def edit
   end
 
   def create
-    @sprint = @project.sprints.build(params[:sprint])
+    release = Release.find(params[:release_id])
+    @sprint = release.sprints.build(params[:sprint])
     if @sprint.save
-      redirect_to project_sprint_url(@project, @sprint)
+      redirect_to project_project_plannings_url(@sprint.release.project)
     else
       render :action => "new"
     end
@@ -33,35 +21,46 @@ class SprintsController < ApplicationController
 
   def update
     if @sprint.update_attributes(params[:sprint])
-      redirect_to project_sprint_url(@project, @sprint)
+      redirect_to project_project_plannings_url(@sprint.release.project)
     else
       render :action => "edit"
     end
   end
 
   def destroy
-    if !params[:tag].nil?
-      @backlog = Backlog.find(params[:tag])
-      @backlog.sprint = nil
-      @backlog.save
-    else
-      @sprint.destroy
-    end
+    @sprint.destroy
+    redirect_to project_project_plannings_url(@sprint.release.project)
+  end
 
-    respond_to do |format|
-      format.html { redirect_to project_sprints_path(@project) }
-      format.xml  { head :ok }
+  # PUT /projects/:project_id/sprints/:id/start
+  def start
+    if @sprint.start
+      redirect_to on_air_project_sprints_url(@sprint.release.project)
+    else
+      flash[:notice] = t("notices.sprint_not_started")
+      redirect_to project_project_plannings_url(@sprint.release.project)
     end
+  end
+
+  def close
+    flash[:notice] = t("notices.sprint_not_closed") unless @sprint.close
+    redirect_to on_air_project_sprints_url(@sprint.release.project)
+  end
+
+  # GET /projects/:project_id/sprints/reopen
+  def reopen 
+    @sprint.reopen
+    redirect_to on_air_project_sprints_url(@sprint.release.project)
+  end
+
+  # GET /projects/:project_id/sprints/on_air
+  def on_air
+    @project = Project.find(params[:project_id])
+    @sprint = @project.sprints.on_air
   end
 
   private
-  def load_project
-    @project = Project.find(params[:project_id])
-    @new_project = @project
-  end
-
   def load_sprint
     @sprint = Sprint.find(params[:id])
-    @new_sprint = @sprint
-  end  
+  end
 end

@@ -1,0 +1,2 @@
+module BurndownChartsHelper
+end

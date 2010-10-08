@@ -39,6 +39,7 @@ gem "escape_utils"
 group :test, :development do
   gem 'factory_girl_rails'
   gem 'rspec-rails', '>= 2.0.0.beta.19'
+  gem 'faker'
 end
 
 group :test do

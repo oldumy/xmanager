@@ -34,8 +34,3 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
-def current_user(name = nil)
-  @@current_user = Factory(name) unless name.nil?
-  @@current_user
-end
-

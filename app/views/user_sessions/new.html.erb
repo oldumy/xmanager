@@ -1,19 +1,10 @@
 <div id = "login-form">
   <%= form_for @user_session, :url => user_session_path  do |form| %>
-    <% if @user_session.errors.any? %>
-      <div id="errorExplanation">
-        <h2><%= pluralize(@user_session.errors.count,"error") %></h2>
-        <ul>
-          <% @user_session.errors.full_messages.each do |msg| %>
-            <li><%= msg %>  </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <%= errors_of(@user_session) %>
     <table>
-      <tr><td><%= form.label "帐号:" %></td><td><%= form.text_field :login %></td></tr>
-      <tr><td><%= form.label "密码:" %><br/></td><td><%= form.password_field :password %></td></tr>
-      <tr><td></td><td class ="login_btn"><%= form.submit '登录' %></td></tr>
+      <tr><td><%= form.label t("labels.account") %></td><td><%= form.text_field :login %></td></tr>
+      <tr><td><%= form.label t("labels.password") %><br/></td><td><%= form.password_field :password %></td></tr>
+      <tr><td></td><td class ="login_btn"><%= form.submit t("buttons.login") %></td></tr>
     </table>
   <% end %>
 </div>

@@ -1,5 +1,5 @@
 module MenusHelper
-  def menus(user, menu, prefix = '')
+  def menus(user, menu = nil, prefix = '')
     content_tag(:div, :id => "main-menu") do
       content_tag(:ul) do
         menus = ""

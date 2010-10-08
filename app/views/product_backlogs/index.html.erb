@@ -1,0 +1,22 @@
+<%= content_for :menus do
+  menus(current_user, :product_backlogs, "/projects/#{@project.id}")
+end %>
+
+<% unless @product_backlogs.empty? %>
+  <div id="product-backlogs">
+    <% @product_backlogs.each do |product_backlog| %>
+      <%= render :partial => 'backlog', :locals => { :backlog => product_backlog } %>
+    <% end %>
+    <%= will_paginate @product_backlogs %>
+  </div>
+<% end %>
+
+<%= no_record_found(@product_backlogs.empty?) %>
+
+<div id="bottom-buttons">
+  <% if current_user.product_owners? %>
+    <%= sexybutton(t("buttons.new"), new_project_product_backlog_path(@project)) do |b|
+      b.image = 'add'
+    end %>
+  <% end %>
+</div>

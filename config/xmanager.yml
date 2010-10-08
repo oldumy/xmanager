@@ -8,54 +8,48 @@ defaults: &defaults
         - "/users"
     product_owners:
       - 
-        - "user_stories"
-        - "/backlogs"
+        - "team_members"
+        - "/team_members"
       -
-        - "new_user_story"
-        - "/backlogs/new"
+        - "product_backlogs"
+        - "/product_backlogs"
       -
-        - "tasks"
-        - "/tasks"
+        - "project_plannings"
+        - "/project_plannings"
       -
-        - "new_task"
-        - "/tasks/new"
+        - "sprint_backlogs"
+        - "/sprints/on_air"
       -
-        - "user_roles"
-        - "/project_roles"
+        - "burndown_charts"
+        - "/burndown_charts"
 
     scrum_masters: 
-      - 
-        - "user_stories"
-        - "/backlogs"
       -
-        - "new_user_story"
-        - "/backlogs/new"
+        - "product_backlogs"
+        - "/product_backlogs"
       -
-        - "tasks"
-        - "/tasks"
+        - "project_plannings"
+        - "/project_plannings"
       -
-        - "new_task"
-        - "/tasks/new"
+        - "sprint_backlogs"
+        - "/sprints/on_air"
       -
-        - "user_roles"
-        - "/project_roles"
+        - "burndown_charts"
+        - "/burndown_charts"
 
     developers:
-      - 
-        - "user_stories"
-        - "/backlogs"
       -
-        - "new_user_story"
-        - "/backlogs/new"
+        - "product_backlogs"
+        - "/product_backlogs"
       -
-        - "tasks"
-        - "/tasks"
+        - "project_plannings"
+        - "/project_plannings"
       -
-        - "new_task"
-        - "/tasks/new"
+        - "sprint_backlogs"
+        - "/sprints/on_air"
       -
-        - "user_roles"
-        - "/project_roles"
+        - "burndown_charts"
+        - "/burndown_charts"
 
 production:
   <<: *defaults

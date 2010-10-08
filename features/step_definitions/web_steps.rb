@@ -17,7 +17,7 @@ end
 World(WithinHelpers)
 
 Given /^I am logged in as "([^"]*)" with password "([^"]*)"$/ do |login, password|
-  @current_user = Factory(login.to_sym)
+  @current_user = User.find_by_login(login) || Factory(login.to_sym)
   visit "/user_session/new" 
   fill_in("user_session[login]", :with => login) 
   fill_in("user_session[password]", :with => password) 

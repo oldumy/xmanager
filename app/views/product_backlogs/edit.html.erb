@@ -1,0 +1,9 @@
+<%= content_for :menus do
+  menus(current_user, :product_backlogs, "/projects/#{@product_backlog.project.id}")
+end %>
+
+<div class="form-wrapper">
+  <h1><%= t("headers.forms.edit_product_backlog") %></h1>
+  <%= render :partial => 'form', :locals => { :product_backlog => @product_backlog } %>
+</div>
+

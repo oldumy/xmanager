@@ -1,44 +1,4 @@
 <div class="form-wrapper">
-  <h1>编辑用户</h1>
-
-  <% form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-      <div id="errorExplanation">
-        <h2><%= pluralize(@user.errors.count,"error") %></h2>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %>  </li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <p>
-      <%= f.label :登录名称 %><br />
-      <%= f.text_field :login %>
-    </p>
-    <p>
-      <%= f.label :用户姓名 %><br />
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :新密码 %><br />
-      <%= f.password_field :password %>
-    </p>
-    <p>
-      <%= f.label :确认新密码 %><br />
-      <%= f.password_field :password_confirmation %>
-    </p>
-    <%  if @current_user.role.role_name == "administrators"%>
-      <p>
-        <% @roles=Role.find(:all,:order=>:description) %>
-        <%= f.label :用户角色 %><br />
-        <%= f.collection_select(:role_id,@roles,:id,:description) %>
-      </p>
-    <%  end %>
-    <p>
-      <%= f.submit '更新' %>
-    </p>
-  <% end %>
-  <%= link_to '详情', @user %>
+  <h1><%= t("headers.forms.edit_user") %></h1>
+  <%= render :partial => 'form', :locals => { :user => @user } %>
 </div>

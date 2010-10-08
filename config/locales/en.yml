@@ -3,18 +3,57 @@
 
 en:
   buttons:
+    add: Add
+    back: Back
     new: New
+    remove: Remove
+    save: Save
   menus:
     users: Users
   labels:
+    acceptance_criteria: Acceptance Criteria
+    assign_to: Assign To
+    description: Description
+    estimated_closed_on: Estimated Closed On
+    estimated_hours: Estimated Hours
+    estimated_hours_template: Estimated Hours(%{estimated_hours})
+    estimated_released_on: Estimated Released On
+    estimated_started_on: Estimated Started On
+    estimated_story_points: Estimated Story Points
+    estimated_story_points_template: Estimated Story Points(%{estimated_story_points})
     name: Name
+    priority: Priority
+    priority_template: Priority(%{priority})
+    remaining_hours: Remaining Hours
+    remaining_hours_template: Remaining Hours(%{remaining_hours})
+    worklogs_count_template: Logs(%{worklogs_count})
   links:
+    add_product_backlog: Add Product Backlog
+    close: Close
     edit: Edit
     delete: Delete
+    log: Log
+    new_task: New Task
+    new_sprint: New Sprint
+    release: Release
+    reopen: Reopen
+    start: Start
+    turnback: Turn Back
   models:
     names:
       project: Project
   notices:
+    close: Are you sure?
     delete: Are you sure?
     errors:
       save: Save %{name} failed, %{count} error(s) found
+    no_record_found: No record found.
+    not_released: No sprint exists, or some sprints are not closed.
+    product_backlog_not_closed: No task found or a task is still open.
+    project_not_started: Project is not started.
+    release: Are you sure?
+    reopen: Are you sure?
+    sprint_not_closed: A sprint backlog is still open.
+    sprint_not_started: No sprint backlog found.
+    start: Are you sure?
+    turnback: Are you sure?

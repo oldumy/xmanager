@@ -1,53 +1,8 @@
+<%= content_for :menus do
+  menus(current_user, :sprint_backlogs, "/projects/#{@task.product_backlog.project.id}")
+end %>
+
 <div class="form-wrapper">
-  <h1>登记工时</h1>
-
-  <%= form_for(@task, :url => backlog_task_path(@task.backlog, @task)) do |f| %>
-    <% if @task.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
-
-        <ul>
-          <% @task.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
-    <div class="field">
-      <%= f.label :name, '名称：' %>
-      <%= @task.name %>
-    </div>
-    <div class="field">
-      <%= f.label :description, '描述：' %><br />
-      <%= @task.description %>
-    </div>
-    <div class="field">
-      <%= f.label :user_id, '指派给：' %>
-      <%= @task.user.name %>
-    </div>
-    <div class="field">
-      <%= f.label :workload, '工作量：'%>
-      <%= @task.workload %>小时
-    </div>
-    <div class="field">
-      <%= f.label :surplus_workload, '剩余工作量：' %><br />
-      <%= f.text_field :surplus_workload %>
-    </div>
-    <div class="field">
-      <%= f.label :progress, '进度'%><br />
-      <select name="task[progress]">
-        <option value=""></option>
-        <%  11.times do |n| %>
-          <option value="<%= n*10 %>" <%= 'selected' if n*10==@task.progress %>><%= "#{n*10}%"%> </option>
-        <%  end %>
-      </select>
-    </div>
-    <div class="actions">
-      <%= f.submit %>
-    </div>
-  <% end %>
-
-  <br />
-  <%= link_to '返回迭代任务列表', sprint_tasks_path(@task.backlog.sprint) %>
+  <h1><%= t("headers.forms.edit_task") %></h1>
+  <%= render :partial => 'form', :locals => { :task => @task } %>
 </div>

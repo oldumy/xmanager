@@ -1,0 +1,8 @@
+<%= content_for :menus do 
+  menus(current_user, :burndown_charts, "/projects/#{@project.id}")
+end %>
+
+<% if @project.started? %>
+  <%= highchart("project-burndown-chart", @project_chart) %>
+  <%= highchart("sprint-burndown-chart", @sprint_chart) %>
+<% end %>

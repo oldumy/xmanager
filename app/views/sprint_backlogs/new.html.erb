@@ -1,0 +1,33 @@
+<%= content_for :menus do
+  menus(current_user, :project_plannings, "/projects/#{@sprint.release.project.id}")
+end %>
+
+<div class="form-wrapper">
+  <% unless @sprint.release.project.product_backlogs.unscheduled.empty? %>
+    <form action="<%= sprint_sprint_backlogs_path(@sprint) %>" method="post">
+      <% @sprint.release.project.product_backlogs.unscheduled.each do |backlog| %>
+        <p>
+          <label>
+            <input name="backlogs[]" type="checkbox" value="<%= backlog.id %>"/>
+            <%= backlog.name %>
+          </label>
+        </p>
+      <% end %>
+      <p>
+        <%= sexybutton(t("buttons.save")) do |b|
+          b.type = 'submit'
+          b.image = 'save'
+        end %>
+        <%= sexybutton(t("buttons.back"), project_project_plannings_path(@sprint.release.project)) do |b|
+          b.image = 'back'
+        end %>
+      </p>
+    </form>
+  <% else %>
+    <%= no_record_found(@sprint.release.project.product_backlogs.unscheduled.empty?) %>
+    <%= sexybutton(t("buttons.back"), project_project_plannings_path(@sprint.release.project)) do |b|
+      b.image = 'back'
+    end %>
+  <% end %>
+
+</div>

@@ -1,11 +1,10 @@
-# encoding: utf-8
 class ProjectsController < ApplicationController
   include PaintAssistent
-  filter_access_to :all
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.order('name ASC').paginate :page => params[:page], :per_page => 10
+    @projects = Project.created_by_or_has_member(current_user)
+    @projects = @projects.paginate :page => params[:page]
   end
 
   # GET /projects/1
@@ -41,6 +40,7 @@ class ProjectsController < ApplicationController
   # POST /projects.xml
   def create
     @project = Project.new(params[:project])
+    @project.creater = current_user
 
     respond_to do |format|
       if @project.save

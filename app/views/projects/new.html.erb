@@ -1,27 +1,4 @@
 <div class="form-wrapper">
   <h1><%= t("headers.forms.new_project") %></h1>
-
-  <%= form_for(@project) do |f| %>
-    <%= errors_of(@project) %>
-    <div class="field">
-      <p>
-        <%= f.label t("labels.name") %><br />
-        <%= f.text_field :name %>
-      </p>
-      <p>
-        <%= f.label t("labels.description") %><br />
-        <%= f.text_area :description %>
-      </p>
-    </div>
-    <div class="actions">
-      <%= sexybutton(t("buttons.save")) do |b|
-        b.id = 'project_submit'
-        b.type = 'submit'
-        b.image = 'save'
-      end %>
-      <%= sexybutton(t("buttons.back"), projects_path) do |b|
-        b.image = 'back'
-      end %>
-    </div>
-  <% end %>
+  <%= render :partial => 'form', :locals => { :project => @project } %>
 </div>

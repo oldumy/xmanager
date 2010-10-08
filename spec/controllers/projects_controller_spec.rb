@@ -3,28 +3,36 @@ require 'spec_helper'
 describe ProjectsController do
   before(:each) do
     activate_authlogic
-    UserSession.create Factory(:product_owner)
+    @current_user = Factory(:oldumy)
+    UserSession.create @current_user
+  end
+
+  describe 'GET index' do
+    it "should filter project by the creater" do
+      projects = [Factory(:xmanager), Factory(:xamaze)]
+      Project.should_receive(:created_by_or_has_member).with(@current_user).and_return(projects)
+      projects.should_receive(:paginate).and_return(projects)
+      get :index
+    end
   end
 
   describe 'POST create' do
+    before(:each) do
+      @project = Factory(:xmanager)
+      Project.should_receive(:new).and_return(@project)
+    end
+
     describe 'with valid parameters' do
       it "redirects to the projects page" do
-        project = Factory(:xmanager)
-        project_attrs = Factory.attributes_for(:xmanager)
+        @project.should_receive(:save).and_return(true)
 
-        Project.stub(:new).and_return(project)
-        project.should_receive(:save).and_return(true)
-
-        post :create, :project => project_attrs
-
+        post :create
         response.should redirect_to(projects_url)
       end
     end
 
     describe 'with invalid parameters' do
       before(:each) do
-        @project = Factory.build(:xmanager)
-        Project.stub(:new).and_return(@project)
         @project.should_receive(:save).and_return(false)
       end
 

@@ -1,0 +1,8 @@
+<%= content_for :menus do
+  menus(current_user, :project_plannings, "/projects/#{@release.project.id}")
+end %>
+
+<div class="form-wrapper">
+  <h1><%= t("headers.forms.edit_release") %></h1>
+  <%= render :partial => 'form', :locals => { :release => @release } %>
+</div>

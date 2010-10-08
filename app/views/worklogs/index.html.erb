@@ -1,0 +1,31 @@
+<%= content_for :menus do
+  menus(current_user, :sprint_backlogs, "/projects/#{@task.product_backlog.project.id}")
+end %>
+
+<div id="task-panel" class="panel">
+  <h1><%= @task.name %></h1>
+  <p>
+    <%= @task.description %>
+  </p>
+  <div class="worklogs">
+    <% @task.worklogs.each do |worklog| %>
+      <h1>
+        <%= t("labels.remaining_hours_template", :remaining_hours => worklog.remaining_hours) %>
+        <span><%= worklog.description %></span>
+        <% if @task.team_member.name == current_user.name %>
+          <span class="actions">
+            <%= link_to t("links.edit"), edit_task_worklog_path(worklog.task, worklog) %> | 
+            <%= link_to t("links.delete"), task_worklog_path(worklog.task, worklog), :confirm => t("notices.delete"), :method => 'delete' %>
+          </span>
+        <% end %>
+      </h1>
+    <% end %>
+  </div>
+</div>
+
+<div id="bottom-buttons">
+  <%= sexybutton(t("buttons.back"), on_air_project_sprints_path(@task.product_backlog.project)) do |b|
+    b.image = 'back'
+  end %>
+</div>
+
