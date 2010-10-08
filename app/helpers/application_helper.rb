@@ -15,7 +15,7 @@ module ApplicationHelper
           lines = ''
           model.errors.each do |attr, msg|
             lines += content_tag(:li) do
-              attr.blank? ? msg : content_tag(:label, t("labels.#{attr.downcase}")) + " " + msg
+              attr.blank? ? msg : content_tag(:label, t("labels.#{attr.to_s.downcase}")) + " " + msg
             end
           end
           lines
