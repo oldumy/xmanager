@@ -244,6 +244,7 @@
     delete: "确认需要删除吗？"
     errors:
       save: "创建%{name}失败，共有%{count}个错误"
+    login_failed: "用户名或密码错误"
     login_successfully: "登录成功"
     no_record_found: "没有记录"
     not_released: "没有定义Sprint，或者存在未关闭的Sprint"

@@ -101,6 +101,7 @@ en:
     delete: Are you sure?
     errors:
       save: Save %{name} failed, %{count} error(s) found
+    login_failed: Account/Password is invalid.
     login_successfully: Login successfully.
     no_record_found: No record found.
     not_released: No sprint exists, or some sprints are not closed.

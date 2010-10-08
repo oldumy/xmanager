@@ -11,6 +11,7 @@ class UserSessionsController < ApplicationController
       flash[:notice] = t("notices.login_successfully")
       redirect_to root_path
     else
+      flash[:notice] = t("notices.login_failed")
       render 'new'
     end
   end

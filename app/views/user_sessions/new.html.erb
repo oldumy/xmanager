@@ -1,6 +1,5 @@
 <div id = "login-form">
   <%= form_for @user_session, :url => user_session_path  do |form| %>
-    <%= errors_of(@user_session) %>
     <table>
       <tr><td><%= form.label t("labels.account") %></td><td><%= form.text_field :login %></td></tr>
       <tr><td><%= form.label t("labels.password") %><br/></td><td><%= form.password_field :password %></td></tr>
