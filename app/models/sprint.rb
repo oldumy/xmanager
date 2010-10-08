@@ -3,6 +3,7 @@ class Sprint < ActiveRecord::Base
   has_many :sprint_backlogs, :dependent => :destroy
   has_many :product_backlogs, :through => :sprint_backlogs
   scope :unclosed, where("closed_on IS NULL")
+  scope :closed, where("closed_on IS NOT NULL")
 
   validates :name, :presence => true, :length => { :within => 1..100 }
   validates :estimated_started_on, :presence => true
@@ -47,9 +48,9 @@ class Sprint < ActiveRecord::Base
     product_backlogs.inject(0) { |sum, backlog| sum += backlog.tasks.sum(:estimated_hours) }
   end
 
-  def remaining_hours
+  def remaining_hours(date)
     product_backlogs.inject(0) do |sum, backlog|
-      sum += backlog.tasks.inject(0) { |s, task| s += task.remaining_hours }
+      sum += backlog.tasks.inject(0) { |s, task| s += task.remaining_hours(date) }
     end
   end
 

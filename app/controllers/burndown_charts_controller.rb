@@ -22,9 +22,10 @@ class BurndownChartsController < ApplicationController
       end
 
       remaining_hours = []
+      days = on_air_sprint.estimated_closed_on.day - on_air_sprint.estimated_started_on.day
       end_day = Time.now < on_air_sprint.estimated_closed_on ? Time.now : on_air_sprint.estimated_closed_on
-      (on_air_sprint.estimated_started_on..end_day.to_date).each do |day|
-        remaining_hours << on_air_sprint.remaining_hours
+      (on_air_sprint.estimated_started_on..end_day.to_date).each do |date|
+        remaining_hours << on_air_sprint.remaining_hours(date)
       end
       @sprint_chart = Yeqs::Jquery::Highchart.new('graph') do |f|
         f.options[:title][:text] = t("titles.sprint_burndown_chart")
@@ -32,7 +33,7 @@ class BurndownChartsController < ApplicationController
         f.options[:chart][:width] = 1000
         f.options[:x_axis][:categories] = on_air_sprint.estimated_started_on..on_air_sprint.estimated_closed_on
         f.options[:y_axis][:title][:text] = ' '
-        f.series(t("labels.ideal_burndown"), [[0, on_air_sprint.estimated_hours.to_i], [remaining_hours.count - 1, 0]])
+        f.series(t("labels.ideal_burndown"), [[0, on_air_sprint.estimated_hours.to_i], [days, 0]])
         f.series(t("labels.real_burndown"), remaining_hours)
         f.html_options[:class] = 'highcharts'
       end

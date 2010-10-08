@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  include PaintAssistent
   # GET /projects
   # GET /projects.xml
   def index

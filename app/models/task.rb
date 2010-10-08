@@ -8,8 +8,9 @@ class Task < ActiveRecord::Base
   validates :name, :presence => true, :length => { :within => 1..100 }
   validates :product_backlog, :presence => true
 
-  def remaining_hours
-    worklogs.exists? ? worklogs.last.remaining_hours : estimated_hours
+  def remaining_hours(date)
+    worklog = worklogs.where("worklogs.updated_at<=?", date.end_of_day).last
+    worklog.nil? ? estimated_hours : worklog.remaining_hours
   end
 
   def closable?
