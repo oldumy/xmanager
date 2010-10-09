@@ -94,7 +94,13 @@ en:
 
   models:
     names:
+      product_backlog: Product Backlog
       project: Project
+      release: Release
+      sprint: Sprint
+      task: Task
+      user: User
+      worklog: Worklog
 
   notices:
     close: Are you sure?

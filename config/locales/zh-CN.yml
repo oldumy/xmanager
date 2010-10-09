@@ -237,7 +237,13 @@
 
   models:
     names:
+      product_backlog: "待办事项"
       project: "项目"
+      release: "发布"
+      sprint: Sprint
+      task: "任务"
+      user: "用户"
+      worklog: "日志"
 
   notices:
     close: "确认需要关闭吗？"
