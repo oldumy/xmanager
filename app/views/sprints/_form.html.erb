@@ -1,4 +1,5 @@
 <%= form_for([sprint.release, sprint]) do |f| %>
+  <%= errors_of(sprint) %>
   <div class="fields">
     <p>
       <label for="sprint_name"><%= t("labels.name") %></label>
