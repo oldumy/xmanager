@@ -340,6 +340,11 @@ h1 span.actions {
 
 .onair > h1 {
   background: #c00;
+  color: #ddd;
+}
+
+.onair > h1 > span {
+  color: #ddd;
 }
 
 .onair > h1 > span.red {
@@ -352,6 +357,11 @@ h1 span.actions {
 
 .onair .sprint-backlog > h1 {
   background: #e00;
+  color: #ddd;
+}
+
+.onair .sprint-backlog > h1 > span {
+  color: #ddd;
 }
 
 .onair .sprint-backlog > h1 > span.actions a {
