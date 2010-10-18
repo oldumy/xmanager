@@ -1,5 +1,12 @@
 <%= content_for :js_on_document_ready do %>
   $('.toggle').click(function() {
+    if($(this).hasClass("hidden")) {
+      $(this).removeClass("hidden");
+      $(this).addClass("show");
+    } else {
+      $(this).removeClass("show");
+      $(this).addClass("hidden");
+    }
     $(this).parent('h1').next(".toggle-box").toggle("slow");
   });
 <% end %>
