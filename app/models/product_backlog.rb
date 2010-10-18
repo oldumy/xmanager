@@ -1,4 +1,6 @@
 class ProductBacklog < ActiveRecord::Base
+  default_scope order("priority ASC")
+
   belongs_to :project
   has_one :sprint_backlog
   has_many :tasks, :dependent => :destroy
