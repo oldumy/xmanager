@@ -456,3 +456,28 @@ h1 span.actions {
   -webkit-border-radius: 5px;
   margin: 10px;
 }
+
+.toggle {
+	margin: 0;
+	padding: 0;
+	cursor: pointer;
+	height: 16px;
+	padding-right: 16px;
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+.hidden {
+  display: none;
+}
+
+.toggle.hidden {
+	display: inline-block;
+  background-image: url(../images/icons/toggle-hide.png) !important;
+}
+
+.toggle.show {
+	display: inline-block;
+  background-image: url(../images/icons/toggle-show.png) !important;
+}
+

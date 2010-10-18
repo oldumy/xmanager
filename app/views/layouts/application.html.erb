@@ -10,6 +10,12 @@
     <%= include_jquery %>
     <%= include_jqueryrails %>
     <%= include_jqueryhighcharts %>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        <%= yield :js_on_document_ready %>
+      });
+    </script>
   </head>
   <body>
     <div id="wrapper">

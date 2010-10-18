@@ -1,3 +1,8 @@
+<%= content_for :js_on_document_ready do %>
+  $('.toggle').click(function() {
+    $(this).parent('h1').next(".toggle-box").toggle("slow");
+  });
+<% end %>
 <%= content_for :menus do
   menus(current_user, :sprint_backlogs, "/projects/#{@project.id}")
 end %>
@@ -18,7 +23,8 @@ end %>
       <% @sprint.sprint_backlogs.each do |backlog| %>
         <div id="sprint-backlog-<%= backlog.id %>" class="sprint-backlog <%= "closable" if backlog.product_backlog.closable? %> <%= "closed" if backlog.product_backlog.closed? %>">
           <h1>
-            <%= backlog.product_backlog.name %>
+            <span class="toggle hidden"></span>
+            <span><%= backlog.product_backlog.name %></span>
             <span><%= t("labels.priority_template", :priority => backlog.product_backlog.priority) %></span> 
             <span><%= t("labels.estimated_story_points_template", :estimated_story_points => backlog.product_backlog.estimated_story_points) %></span>
             <% if current_user.product_owners? || current_user.scrum_masters? %>
@@ -32,46 +38,48 @@ end %>
               </span>
             <% end %>
           </h1>
-          <p>
-            <label><%= t("labels.description") %></label>
-            <%= backlog.product_backlog.description %>
-          </p>
-          <p>
-            <label><%= t("labels.acceptance_criteria") %></label>
-            <%= backlog.product_backlog.acceptance_criteria %>
-          </p>
-          <div class="sprint-backlogs">
-            <% backlog.product_backlog.tasks.each do |task| %>
-              <div id="task-<%= task.id %>" class="task <%= "closable" if task.closable? %> <%= "closed" if task.closed? %>">
-                <h1>
-                  <%= link_to task.name, task_worklogs_path(task) %>
-                  <% if task.team_member %>
-                    <span class="red">
-                      <%= task.team_member.name %>
-                    </span> 
-                  <% end %>
-                  <span><%= t("labels.estimated_hours_template", :estimated_hours => task.estimated_hours) %></span>
-                  <span><%= t("labels.remaining_hours_template", :remaining_hours => task.worklogs.last.nil? ? task.estimated_hours : task.worklogs.last.remaining_hours) %></span>
-                  <span><%= t("labels.worklogs_count_template", :worklogs_count => task.worklogs.count) %></span>
-                  <span class="actions">
-                    <% unless task.closed? %>
-                      <% if (current_user.product_owners? || current_user.scrum_masters?) && task.closable? %>
-                        <%= link_to t("links.close"), close_task_path(task), :confirm => t("notices.close"), :method => 'put' %> | 
-                      <% end %>
-                      <% if (not task.closable?) && task.team_member && task.team_member.name == current_user.name %>
-                        <%= link_to t("links.log"), new_task_worklog_path(task) %> | 
-                      <% end %>
-                      <% if current_user.product_owners? || current_user.scrum_masters? %>
-                        <%= link_to t("links.edit"), edit_product_backlog_task_path(backlog.product_backlog, task) %> | 
-                        <%= link_to t("links.delete"), product_backlog_task_path(backlog.product_backlog, task), :confirm => t("notices.delete"), :method => 'delete' %>
-                      <% end %>
-                    <% else %>
-                        <%= link_to t("links.reopen"), reopen_task_path(task), :confirm => t("notices.reopen"), :method => 'put' if current_user.product_owners? || current_user.scrum_masters? %>
+          <div class="toggle-box hidden">
+            <p>
+              <label><%= t("labels.description") %></label>
+              <%= backlog.product_backlog.description %>
+            </p>
+            <p>
+              <label><%= t("labels.acceptance_criteria") %></label>
+              <%= backlog.product_backlog.acceptance_criteria %>
+            </p>
+            <div class="sprint-backlogs">
+              <% backlog.product_backlog.tasks.each do |task| %>
+                <div id="task-<%= task.id %>" class="task <%= "closable" if task.closable? %> <%= "closed" if task.closed? %>">
+                  <h1>
+                    <%= link_to task.name, task_worklogs_path(task) %>
+                    <% if task.team_member %>
+                      <span class="red">
+                        <%= task.team_member.name %>
+                      </span> 
                     <% end %>
-                  </span>
-                </h1>
-              </div>
-            <% end %>
+                    <span><%= t("labels.estimated_hours_template", :estimated_hours => task.estimated_hours) %></span>
+                    <span><%= t("labels.remaining_hours_template", :remaining_hours => task.worklogs.last.nil? ? task.estimated_hours : task.worklogs.last.remaining_hours) %></span>
+                    <span><%= t("labels.worklogs_count_template", :worklogs_count => task.worklogs.count) %></span>
+                    <span class="actions">
+                      <% unless task.closed? %>
+                        <% if (current_user.product_owners? || current_user.scrum_masters?) && task.closable? %>
+                          <%= link_to t("links.close"), close_task_path(task), :confirm => t("notices.close"), :method => 'put' %> | 
+                        <% end %>
+                        <% if (not task.closable?) && task.team_member && task.team_member.name == current_user.name %>
+                          <%= link_to t("links.log"), new_task_worklog_path(task) %> | 
+                        <% end %>
+                        <% if current_user.product_owners? || current_user.scrum_masters? %>
+                          <%= link_to t("links.edit"), edit_product_backlog_task_path(backlog.product_backlog, task) %> | 
+                          <%= link_to t("links.delete"), product_backlog_task_path(backlog.product_backlog, task), :confirm => t("notices.delete"), :method => 'delete' %>
+                        <% end %>
+                      <% else %>
+                          <%= link_to t("links.reopen"), reopen_task_path(task), :confirm => t("notices.reopen"), :method => 'put' if current_user.product_owners? || current_user.scrum_masters? %>
+                      <% end %>
+                    </span>
+                  </h1>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

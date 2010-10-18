@@ -1,3 +1,9 @@
+<%= content_for :js_on_document_ready do %>
+  $('.toggle').click(function() {
+    $(this).parent('h1').next(".toggle-box").toggle("slow");
+  });
+<% end %>
+
 <%= content_for :menus do
   menus(current_user, :project_plannings, "/projects/#{@project.id}")
 end %>

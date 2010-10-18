@@ -1,6 +1,7 @@
 <div id="release-<%= release.id %>" class="release <%= "closable" if release.releasable? %> <%= "released" if release.released? %>">
   <h1>
-    <%= release.name %>
+    <span class="toggle hidden"></span>
+    <span><%= release.name %></span>
     <% if release.released? %>
       <span class="red"><%= release.released_on %></span> 
       <span class="deleted"><%= release.estimated_released_on %></span> 
@@ -21,11 +22,12 @@
       </span>
     <% end %>
   </h1>
-  <div class="sprints">
+  <div class="toggle-box hidden sprints">
     <% release.sprints.each do |sprint| %>
       <div id="sprint-<%= sprint.id %>" class="sprint <%= "onair" if sprint.on_air? %> <%= "closable" if sprint.closable? %> <%="closed" if sprint.closed? %>">
         <h1>
-          <%= sprint.name %>
+          <span class="toggle hidden"></span>
+          <span><%= sprint.name %></span>
           <% if sprint.closed? %>
             <span class="red"><%= "#{sprint.started_on}..#{sprint.closed_on}" %></span> 
             <span class="deleted"><%= "#{sprint.estimated_started_on}..#{sprint.estimated_closed_on}" %></span> 
@@ -50,11 +52,12 @@
             </span>
           <% end %>
         </h1>
-        <div class="sprint-backlogs">
+        <div class="toggle-box hidden sprint-backlogs">
           <% sprint.sprint_backlogs.each do |backlog| %>
             <div id="sprint-backlog-<%= backlog.id %>" class="sprint-backlog <%= "closed" if backlog.product_backlog.closed? %>">
               <h1>
-                <%= backlog.product_backlog.name %>
+                <span class="toggle hidden"></span>
+                <span><%= backlog.product_backlog.name %></span>
                 <span><%= t("labels.priority_template", :priority => backlog.product_backlog.priority) %> <%= t("labels.estimated_story_points_template", :estimated_story_points => backlog.product_backlog.estimated_story_points) %></span>
                 <% if current_user.role_symbols.include?(:product_owners) %>
                   <% unless sprint.closed? %>
@@ -65,14 +68,16 @@
                   <% end %>
                 <% end %>
               </h1>
-              <p>
-                <label><%= t("labels.description") %></label>
-                <%= backlog.product_backlog.description %>
-              </p>
-              <p>
-                <label><%= t("labels.acceptance_criteria") %></label>
-                <%= backlog.product_backlog.acceptance_criteria %>
-              </p>
+              <div class="toggle-box hidden">
+                <p>
+                  <label><%= t("labels.description") %></label>
+                  <%= backlog.product_backlog.description %>
+                </p>
+                <p>
+                  <label><%= t("labels.acceptance_criteria") %></label>
+                  <%= backlog.product_backlog.acceptance_criteria %>
+                </p>
+              </div>
             </div>
           <% end %>
         </div>
